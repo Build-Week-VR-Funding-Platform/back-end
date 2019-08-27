@@ -7,12 +7,23 @@ const restricted = require('../auth/restricted_middleware')
 router.get('/', restricted, (req, res) => {
     return db.findFounder()
         .then(founder => {
-            res.status(200).json({ loggedInUser: req.founder.username, founder })
+            res.status(200).json({ loggedInUser: req.user.username, founder })
         })
         .catch(err => {
             res.status(400).json({ message: 'Could not retrieve founders list, make sure you are logged in.' })
         })
-})//gives full list of founders 
+})//gives full list of founders
+
+router.get('/public', (req, res) => {
+    return db.findFounder()
+        .then(founder => {
+            res.status(200).json(founder)
+        })
+        .catch(err => {
+            res.status(400).json({ message: 'Could not retrieve founders list.' })
+        })
+})//PUBLIC: gives full list of founders 
+
 
 router.get('/:id', restricted, (req, res) => {
     const { id } = req.params

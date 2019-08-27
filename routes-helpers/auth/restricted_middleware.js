@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
     if (token) {
         jwt.verify(token, secret.jwtSecret, (err, decodeToken) => {
             if (err) {
-                res.status(400).json({ message: 'Can not pass' })
+                res.status(400).json({ message: 'Can not pass, please check your authorization' })
             } else {
                 req.user = { username: decodeToken.username }
                 next()

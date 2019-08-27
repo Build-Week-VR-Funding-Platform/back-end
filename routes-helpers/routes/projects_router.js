@@ -7,12 +7,22 @@ const restricted = require('../auth/restricted_middleware');
 router.get('/', restricted, (req, res) => {
     return db.findProject()
         .then(project => {
-            res.status(200).json({ loggedInUser: req.project.project_title, project })
+            res.status(200).json({ loggedInUser: req.user.username, project })
         })
         .catch(err => {
             res.status(400).json({ message: 'Could not retrieve projects list, make sure you are logged in.' })
         })
 })//gives full list of project
+
+router.get('/public', (req, res) => {
+    return db.findProject()
+        .then(project => {
+            res.status(200).json({ project})
+        })
+        .catch(err => {
+            res.status(400).json({ message: 'Could not retrieve projects list.' })
+        })
+})//PUBLIC ROUTE: gives full list of project
 
 router.get('/:id', restricted, (req, res) => {
     const { id } = req.params

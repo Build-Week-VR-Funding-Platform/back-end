@@ -10,7 +10,7 @@ router.post('/reg', (req, res) => {
     const founder = req.body
     const hash = bcrypt.hashSync(founder.password, 10)
     founder.password = hash
-    return founders.addFounder(founder)
+    return db.addFounder(founder)
         .then(created => {
             res.status(201).json(created)
         }).catch(error => {
@@ -21,7 +21,7 @@ router.post('/reg', (req, res) => {
 
 router.post('/login', (req, res) => {
     let { password, username } = req.body
-    founders.findBy({ username })
+    db.findBy({ username })
         .first()//takes first item out of object
         //passing it the password guess in plain text and the password hash obtained from the database to validate credentials.
         //If the password guess is valid, the method returns true, otherwise it returns false.The library will hash the password guess first and then compare the hashes

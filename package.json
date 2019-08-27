@@ -4,7 +4,7 @@
   "description": "VR funding platform",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "helmet": "^3.20.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.19.2",
+    "knex-cleaner": "^1.3.0",
     "sqlite3": "^4.1.0"
   }
 }
