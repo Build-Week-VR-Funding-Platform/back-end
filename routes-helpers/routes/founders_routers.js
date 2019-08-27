@@ -69,4 +69,4 @@ router.put('/:id', restricted, (req, res) => {
         })
 })// update
 
-module.exports = router;
+module.exports = router; 

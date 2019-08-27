@@ -38,7 +38,7 @@ router.get('/:id', restricted, (req, res) => {
 
 router.delete('/:id', restricted, (req, res) => {
     const { id } = req.params
-    db.removeFounder(id)
+    db.removeProject(id)
         .then(project => {
             if (project !== 0) {
                 res.status(201).json(project)
@@ -50,7 +50,7 @@ router.delete('/:id', restricted, (req, res) => {
 
 router.post('/', restricted, (req, res) => {
     const project = req.body
-    return db.addFounder(project)
+    return db.addProject(project)
         .then(created => {
             res.status(201).json(created)
         }).catch(error => {
