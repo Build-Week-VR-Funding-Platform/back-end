@@ -16,7 +16,7 @@ server.use(express.json());
 server.use(cors());
 
 
-// server.use('/api/auth', authRouter);// where you url is housed
+server.use('/api/auth', authRouter);// where you url is housed
 server.use('/api/projects', projectsRouter);// where you url is housed
 server.use('/api/founders', foundersRouter);// where you url is housed
 

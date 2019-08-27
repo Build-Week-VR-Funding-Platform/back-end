@@ -4,7 +4,7 @@ const restricted = require('../auth/restricted_middleware');
 
 //MUST CREATE UPDATE
 
-router.get('/projects', restricted, (req, res) => {
+router.get('/', restricted, (req, res) => {
     return db.findProject()
         .then(project => {
             res.status(200).json({ loggedInUser: req.project.project_title, project })
@@ -14,7 +14,7 @@ router.get('/projects', restricted, (req, res) => {
         })
 })//gives full list of project
 
-router.get('/projects/:id', restricted, (req, res) => {
+router.get('/:id', restricted, (req, res) => {
     const { id } = req.params
     return db.findProjectById(id)
         .then(project => {
@@ -26,7 +26,7 @@ router.get('/projects/:id', restricted, (req, res) => {
 
 })//gives project by id 
 
-router.delete('/projects/:id', restricted, (req, res) => {
+router.delete('/:id', restricted, (req, res) => {
     const { id } = req.params
     db.removeFounder(id)
         .then(project => {
@@ -38,7 +38,7 @@ router.delete('/projects/:id', restricted, (req, res) => {
         })
 })// deletes project from database
 
-router.post('/projects', restricted, (req, res) => {
+router.post('/', restricted, (req, res) => {
     const project = req.body
     return db.addFounder(project)
         .then(created => {
@@ -48,7 +48,7 @@ router.post('/projects', restricted, (req, res) => {
         })
 })// add project to database
 
-router.put('/projects/:id', restricted, (req, res) => {
+router.put('/:id', restricted, (req, res) => {
     const {id} = req.params
     const body = req.body
     db.updateProject(id, body)

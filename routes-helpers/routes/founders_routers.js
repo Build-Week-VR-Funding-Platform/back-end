@@ -2,9 +2,9 @@ const router = require('express').Router();
 const db = require('../models/models.js');
 const restricted = require('../auth/restricted_middleware')
 
-//MUST CREATE UPDATE
 
-router.get('/founders', restricted, (req, res) => {
+
+router.get('/', restricted, (req, res) => {
     return db.findFounder()
         .then(founder => {
             res.status(200).json({ loggedInUser: req.founder.username, founder })
@@ -14,7 +14,7 @@ router.get('/founders', restricted, (req, res) => {
         })
 })//gives full list of founders 
 
-router.get('/founders/:id', restricted, (req, res) => {
+router.get('/:id', restricted, (req, res) => {
     const { id } = req.params
     return db.findFounderById(id)
         .then(founder => {
@@ -26,7 +26,7 @@ router.get('/founders/:id', restricted, (req, res) => {
 
 })//gives founder by id 
 
-router.delete('/founders/:id', restricted, (req, res) => {
+router.delete('/:id', restricted, (req, res) => {
     const { id } = req.params
     db.removeFounder(id)
         .then(founder => {
@@ -38,7 +38,7 @@ router.delete('/founders/:id', restricted, (req, res) => {
         })
 })// deletes founder from database
 
-router.post('/founders', restricted, (req, res) => {
+router.post('/', restricted, (req, res) => {
     const founder = req.body
     return db.addFounder(founder)
         .then(created => {
@@ -48,7 +48,7 @@ router.post('/founders', restricted, (req, res) => {
         })
 })// add founder to database
 
-router.put('/founders/:id', restricted, (req, res) => {
+router.put('/:id', restricted, (req, res) => {
     const { id } = req.params
     const body = req.body
     db.updateFounder(id, body)

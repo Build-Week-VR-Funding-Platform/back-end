@@ -74,10 +74,10 @@ function updateFounder(id, founders) {
     return db('founders')
     .where('id', Number(id))
     .update(founders)
-}// NEED TO CREATE
+}// update Founder info
 
 function updateProject(id, projects) {
     return db('projects')
     .where('id', Number(id))
     .update(projects)
-}// NEED TO CREATE
+}// update project info
